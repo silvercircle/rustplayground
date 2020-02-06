@@ -1,5 +1,3 @@
-#![allow(warnings)]
-
 extern crate gtk;
 extern crate gio;
 
@@ -8,7 +6,6 @@ use gio::prelude::*;
 
 use gtk::{Application, ApplicationWindow, Button};
 
-use std::env::args;
 use std::marker::Copy;
 use std::rc::Rc;
 use std::cell::{Cell, RefCell};
@@ -88,6 +85,7 @@ fn main() {
     });
     testtest(&mut ctx);
     application.run(&[]);
+    ctx.cleanup();
 }
 
 fn testtest(ctx: &mut context::Context) {
@@ -119,7 +117,7 @@ fn testtest(ctx: &mut context::Context) {
     let mut _rect: Rect<i32> = Rect { a: _point1, b: _point2,
         valid: Cell::new(false), foo: RefCell::new( Point {x:30, y:30} )};
 
-    let mut bar: Rc<Rect<i32>> = Rc::new(Rect {a: _point1.clone(),
+    let bar: Rc<Rect<i32>> = Rc::new(Rect {a: _point1.clone(),
         b: _point2.clone(), valid: Cell::new(false),
         foo: RefCell::new(Point{x: 30, y: 40}) });
 

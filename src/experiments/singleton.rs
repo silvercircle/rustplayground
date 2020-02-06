@@ -2,10 +2,10 @@ extern crate app_dirs;
 
 use app_dirs::*;
 use serde::{Deserialize, Serialize};
+
 use simplelog::{Config as LogConfig, LevelFilter, WriteLogger};
 use std::fs::{create_dir_all, File};
 use std::io::prelude::*;
-use std::mem::transmute;
 use std::path::{Path, PathBuf};
 use std::sync::Once;
 
@@ -25,13 +25,13 @@ pub struct Config {
 
 impl Default for Config {
     fn default() -> Self {
-        let data_dir = get_app_dir(AppDataType::UserData, &APP_INFO, "").unwrap();
+        let _data_dir = get_app_dir(AppDataType::UserData, &APP_INFO, "").unwrap();
         Self {
             _lastrun: chrono::Local::now().to_rfc3339(),
             _is_intialiazed: false,
             _config_dir: get_app_dir(AppDataType::UserConfig, &APP_INFO, "").unwrap(),
-            _data_dir: data_dir.clone(),
-            _log_file_name: [data_dir.clone(), PathBuf::from("log.log")]
+            _data_dir: _data_dir.clone(),
+            _log_file_name: [_data_dir.clone(), PathBuf::from("log.log")]
                 .iter()
                 .collect(),
         }
@@ -111,7 +111,6 @@ pub fn get_instance() -> &'static mut Context {
     static ONCE: Once = Once::new();
     unsafe {
         ONCE.call_once(|| {
-            let data_dir = get_app_dir(AppDataType::UserData, &APP_INFO, "").unwrap();
             let context = Context {
                 _use_count: 0,
                 _cfg: Default::default(),

@@ -18,7 +18,7 @@ pub fn optarg(args: &Aoptargs) {
     println!("{}", args.foo);
 }
 
-pub fn optarg1(i: i32, f: Option<i32>, s: Option<&String>) {
-    println!("{}", s.unwrap_or(&"no string given".to_string()));
+pub fn optarg1(_i: i32, _f: Option<i32>, _s: Option<&String>) {
+    println!("{}", _s.unwrap_or(&"no string given".to_string()));
 }
 
