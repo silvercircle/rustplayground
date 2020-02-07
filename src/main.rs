@@ -1,5 +1,7 @@
 extern crate gtk;
 extern crate gio;
+#[macro_use]
+extern crate lazy_static;
 
 use gtk::prelude::*;
 use gio::prelude::*;
@@ -15,7 +17,7 @@ pub mod my_utils;
 use my_utils::*;
 
 mod experiments;
-use experiments::default_args::*;
+use experiments::{default_args, lazystatic};
 use experiments::singleton as context;
 
 struct Foo {
@@ -90,7 +92,6 @@ fn main() {
 
 fn testtest(ctx: &mut context::Context) {
     ctx._use_count = ctx._use_count + 1;
-    ctx._use_count = ctx._use_count + 1;
     println!("Hello, world!");
 
     let mut a1: Foo  = Foo { x:10, y:10 };
@@ -146,17 +147,16 @@ fn testtest(ctx: &mut context::Context) {
     do_foo(&mut _foo, &mut 10);
     _foo.push(10);
 
+    experiments::test::run();
+    
     let mut s = getstring();
     s.push_str("appended");
+    default_args::run();
+    lazystatic::run();
 
-    // test default arguments, see experiments/default_args.rs
-
-    // method 1: param struct
-    optarg(&Aoptargs {i: 20, .. Aoptargs::default() });
-
-    // method 2: use Option<T>
-    optarg1(1, Some(10), Some(&"string was given".to_string()));
-    optarg1(1, Some(10), None);
+    let mut _instance = lazystatic::GLOBAL.lock().unwrap();
+    _instance.greet();
+    drop(_instance);
 }
 
 fn do_rect(_r: &Rect<i32>) {
@@ -180,3 +180,6 @@ fn getstring() -> String {
     s
 }
 
+pub fn runme() {
+    println!("runme() in main module");
+}

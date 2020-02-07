@@ -1,3 +1,10 @@
+/*
+ * how to use a global shared singleton pattern in rust.
+ *
+ * struct Config should only exist as as single instance
+ *
+ */
+
 extern crate app_dirs;
 
 use app_dirs::*;
