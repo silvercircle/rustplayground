@@ -1,3 +1,11 @@
+/*
+ * some patterns for using default and optional arguments in rust
+ * There are no C++-style default args nor are there named arguments or
+ * function overloading.
+ *
+ * argument structures or Option<T> can be used to simulate optional
+ * parameters in Rust though.
+ */
 
 pub struct Aoptargs {
     pub i: i32,
@@ -29,6 +37,7 @@ fn optarg1(_i: i32, _f: Option<i32>, _s: Option<&String>) {
 
 pub fn run() {
     // method 1: param struct
+    // only specify parameters that differ from default values
     optarg(&Aoptargs {i: 20, .. Aoptargs::default() });
 
     // method 2: use Option<T>

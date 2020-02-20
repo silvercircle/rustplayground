@@ -1,13 +1,14 @@
-extern crate gtk;
-extern crate gio;
+//extern crate gtk;
+//extern crate gio;
 #[macro_use]
 extern crate lazy_static;
 
+/*
 use gtk::prelude::*;
 use gio::prelude::*;
 
 use gtk::{Application, ApplicationWindow, Button};
-
+*/
 use std::marker::Copy;
 use std::rc::Rc;
 use std::cell::{Cell, RefCell};
@@ -66,6 +67,7 @@ impl Area<i32> for Rect<i32> {
 fn main() {
     let mut ctx = context::get_instance();
 
+    /*
     let application = Application::new(
         Some("com.github.gtk-rs.examples.basic"),
         Default::default(),
@@ -80,13 +82,16 @@ fn main() {
         let button = Button::new_with_label("Click me!");
         button.connect_clicked(|_| {
             println!("Clicked!");
+            let mut ctx = context::get_instance();
+            testtest(&mut ctx);
         });
         window.add(&button);
         window.resize(500, 200);
         window.show_all();
     });
-    testtest(&mut ctx);
     application.run(&[]);
+    */
+    testtest(&mut ctx);
     ctx.cleanup();
 }
 
@@ -148,7 +153,7 @@ fn testtest(ctx: &mut context::Context) {
     _foo.push(10);
 
     experiments::test::run();
-    
+
     let mut s = getstring();
     s.push_str("appended");
     default_args::run();
@@ -157,6 +162,8 @@ fn testtest(ctx: &mut context::Context) {
     let mut _instance = lazystatic::GLOBAL.lock().unwrap();
     _instance.greet();
     drop(_instance);
+    experiments::generics::run();
+    experiments::smart_pointers::run();
 }
 
 fn do_rect(_r: &Rect<i32>) {

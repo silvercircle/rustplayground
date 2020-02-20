@@ -63,6 +63,7 @@ impl Context {
 
         log::info!("Context::init(): Log file created at {}", log_file_name);
         debug_assert_ne!(config_file_name.len(), 0);
+        debug_assert_ne!(log_file_name.len(), 0);
 
         if Path::new(config_file_name.as_str()).exists() {
             log::info!(
@@ -112,7 +113,6 @@ impl Context {
     }
 }
 
-
 pub fn get_instance() -> &'static mut Context {
     static mut CTX: *mut Context = 0 as *mut Context;
     static ONCE: Once = Once::new();
@@ -121,7 +121,7 @@ pub fn get_instance() -> &'static mut Context {
             let context = Context {
                 _use_count: 0,
                 _cfg: Default::default(),
-                _exe_path: std::env::current_exe().unwrap(),
+                _exe_path: std::env::current_exe().unwrap()
             };
             CTX = std::mem::transmute(Box::new(context));
 

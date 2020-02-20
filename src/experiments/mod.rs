@@ -16,6 +16,14 @@ pub mod test {              // this is experiments::test
 // but their code is located in separate files. This is good practice for
 // larger modules as it helps to keep individual files small in size.
 
+// the compiler will assume that a <module name>.rs file in the current
+// directory will hold the code for the declared module(s).
+// so default_args.rs must exist and will be imported (inlcuded in C
+// terminology).
+
+// this practice is a bit like the #inlcude statement of C/C++.
 pub mod default_args;       // -> module experiments::default_args
 pub mod singleton;          // -> experiments::singleton
 pub mod lazystatic;         // -> .... you get the idea
+pub mod generics;
+pub mod smart_pointers;
