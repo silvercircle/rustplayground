@@ -12,7 +12,6 @@ use gtk::{Application, ApplicationWindow, Button};
 use std::marker::Copy;
 use std::rc::Rc;
 use std::cell::{Cell, RefCell};
-use std::default::Default;
 
 pub mod my_utils;
 use my_utils::*;
