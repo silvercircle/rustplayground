@@ -47,7 +47,6 @@ pub fn run() {
     // ordinary Mutexes do not distinguish between read and write access. Even read-only
     // locks are exclusive.
     let mut _instance = GLOBAL.lock().unwrap();
-
     _instance.greet();
     _instance.use_count = _instance.use_count + 1;
 
@@ -62,6 +61,7 @@ pub fn run() {
     let mut _rwinstance1 = RWGLOBAL.read().unwrap();
     _rwinstance.greet();
     _rwinstance1.greet();
+
 
     // _rwinstance1.use_count = _rwinstance1.use_count + 1
     // The above line would lead to a compilation error, even though the instance

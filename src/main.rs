@@ -118,7 +118,7 @@ fn testtest(ctx: &mut context::Context) {
     let mut _point1: Point<i32> = Point {x: 10, y:10};
     let mut _point2: Point<i32> = Point {x: 20, y:20};
     let mut _point3: Point<i32> = Point {x: 30, y:40};
-
+    
     let mut _rect: Rect<i32> = Rect { a: _point1, b: _point2,
         valid: Cell::new(false), foo: RefCell::new( Point {x:30, y:30} )};
 
@@ -131,14 +131,12 @@ fn testtest(ctx: &mut context::Context) {
     println!("{}", _rect.area());
     println!("{}", bar.area());
     bar.valid.set(true);
-
     let f = bar.foo.borrow();
     drop(f);
 
     let mut t = bar.foo.borrow_mut();
     t.x = 20;
     t.y = 50;
-
     my_test();
 
     let mut y = Vec::new();
