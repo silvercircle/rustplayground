@@ -1,4 +1,3 @@
-
 pub fn run() {
-    println!("Testing generics");
+  println!("Testing generics");
 }
